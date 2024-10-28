@@ -1,0 +1,60 @@
+<%- include ('partials/header.ejs') -%>
+<form>
+    <h2>Sign Up</h2>
+    <label for="email">Email</label>
+    <input type="text" name="email" required>
+    <div class="email error"></div>
+
+    
+    <label for="email">Password</label>
+    <input type="password" name="password" required>
+    <div class="password error"></div>
+    <button>Sign Up</button>
+</form>
+
+
+<script>
+    const form=document.querySelector('form');
+    const Emailerror=document.querySelector('.email.error')// selecting the div class that contain email error
+    const Passworderror=document.querySelector('.password.error')// selecting  the div class that contian the password error 
+
+
+
+
+    form.addEventListener('submit',async(e)=>{
+        e.preventDefault();
+        const email=form.email.value
+        const password=form.password.value
+
+        //reset the error for every cheack becuase it must errase the error that is already shown 
+        Emailerror.textContent=""
+        Passworderror.textContent=""
+       //fetch to server
+       try{
+        const result=await fetch('/signup',{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json'
+            },
+            body:JSON.stringify({email,password})
+
+        })
+        // reciving data fromthe server
+        const data=await result.json()
+        console.log(data)
+        if (data.errors){
+            Emailerror.textContent=data.errors.email;
+            Passworderror.textContent=data.errors.password;
+        }
+        if(data.user){
+            location.assign('/')
+        }
+
+        
+       }
+       catch(err){
+        console.log(err)
+       }
+    })
+</script>
+<%- include ('partials/footer.ejs') -%>
