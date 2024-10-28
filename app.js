@@ -16,6 +16,6 @@ mongoose.connect(dburi,{useNewUrlParser:true,useUnifiedTopology:true,useCreateIn
 .catch((err)=>console.log(err))
 
 app.get('/',(req,res)=>res.render('home'))
-app.get('/food',(req,res)=> res.render('smoothies'))
+app.get('/smoothies',(req,res)=> res.render('smoothies'))
 app.use(authroutes);
 //cookies

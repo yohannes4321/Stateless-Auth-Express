@@ -1,7 +1,6 @@
 const User=require("../models/User")
 const jwt=require('jsonwebtoken')
-const dotenv=require('dotenv')
-
+const bcrypt=require('bcrypt')
 
 const handleErrors = (err) => {
     console.log(err.message, err.code); 
@@ -21,6 +20,13 @@ const handleErrors = (err) => {
     if (err.code === 11000) {
         errors.email = "Email is already registered. Use another email to register.";
         return errors; 
+    }
+
+    if (err.message==='Incorrect Email'){
+        errors.email="This Email is not Registered"
+    }
+    if(err.message==="Incorrect Password"){
+        errors.password="Incorrect Password "
     }
 
     return errors; 
@@ -60,9 +66,24 @@ module.exports.signup_post=async(req,res)=>{
     }
 }
 
-
-module.exports.login_post =(req,res)=>{
-    const {email,password}=req.body;
-    console.log(email,password)
-    res.send('user login')
-}
+module.exports.login_post = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ email });
+        if (user) {
+            const checkpassword = await bcrypt.compare(password, user.password);
+            if (checkpassword) {
+                const token = createtoken(user._id);
+                res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+                res.status(200).json({ user: user._id });
+            } else {
+                throw new Error("Incorrect Password");
+            }
+        } else {
+            throw new Error("Incorrect Email");
+        }
+    } catch (err) {
+        const errors = handleErrors(err);
+        res.status(400).json({ errors });
+    }
+};
