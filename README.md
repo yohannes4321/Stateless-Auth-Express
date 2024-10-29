@@ -23,17 +23,19 @@ A simple Node.js application that demonstrates JWT-based authentication using Ex
    cd Stateless-Auth-Express
 Install the dependencies:
 
-bash
-Copy code
+```bash
+
 npm install
+```
 Create a .env file in the root directory and add your environment variables. See Environment Variables for more details.
 
 Usage
 Start the application:
 
-bash
-Copy code
-npm start
+```bash
+
+nodemon app.js
+```
 Open your browser and navigate to http://localhost:3000.
 
 API Endpoints
@@ -46,10 +48,10 @@ GET	/logout	Logout user and clear token
 Environment Variables
 Create a .env file in the root directory with the following variables:
 
-makefile
-Copy code
+```bash
 SECRET_KEY=your_secret_key
 MONGO_URI=your_mongodb_connection_string
+```
 Replace your_secret_key and your_mongodb_connection_string with your actual values.
 
 Docker
@@ -57,14 +59,14 @@ To run the application using Docker, follow these steps:
 
 Build the Docker image:
 
-bash
-Copy code
+```bash
+
 docker build -t my-node-app .
 Run the Docker container:
-
-bash
-Copy code
+```
+```bash
 docker run -p 3000:3000 -e JWT_SECRET='your_jwt_secret' my-node-app
+```
 Access the application at http://localhost:3000.
 
 Contributing
@@ -77,7 +79,7 @@ vbnet
 Copy code
 
 ### Instructions for Customization
-1. **Repository Link**: Replace `https://github.com/yourusername/node-express-jwt-auth.git` with the actual URL of your GitHub repository.
+1. **Repository Link**: Replace `https://github.com/yohannes4321/Stateless-Auth-Express` with the actual URL of your GitHub repository.
 2. **Secret Key**: Customize the `SECRET_KEY` and other environment variables according to your project's requirements.
 3. **License**: If you're using a different license, make sure to update the license section accordingly.
 
@@ -92,4 +94,3 @@ Feel free to modify any sections to better fit your project's specifics!
 
 
 
-C
