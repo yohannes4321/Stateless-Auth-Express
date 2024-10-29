@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mongo # Optional if you're using a MongoDB service
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"

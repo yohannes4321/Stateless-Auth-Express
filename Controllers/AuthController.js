@@ -1,7 +1,8 @@
 const User=require("../models/User")
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
-
+const dotenv=require('dotenv')
+dotenv.config()
 const handleErrors = (err) => {
     console.log(err.message, err.code); 
     let errors = { email: '', password: '' };
@@ -87,3 +88,8 @@ module.exports.login_post = async (req, res) => {
         res.status(400).json({ errors });
     }
 };
+
+module.exports.logout_get=(req,res)=>{
+    res.cookie('jwt','',{maxAge:1})
+    res.redirect('/login')
+}
