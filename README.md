@@ -31,6 +31,11 @@ Create a .env file in the root directory and add your environment variables. See
 
 Usage
 Start the application:
+```bash
+SECRET_KEY=your_secret_key
+MONGO_URI=your_mongodb_connection_string
+```
+Replace your_secret_key and your_mongodb_connection_string with your actual values.
 
 ```bash
 
@@ -48,12 +53,7 @@ GET	/logout	Logout user and clear token
 Environment Variables
 Create a .env file in the root directory with the following variables:
 
-```bash
-SECRET_KEY=your_secret_key
-MONGO_URI=your_mongodb_connection_string
-```
-Replace your_secret_key and your_mongodb_connection_string with your actual values.
-
+Second way
 Docker
 To run the application using Docker, follow these steps:
 
